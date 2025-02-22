@@ -1,14 +1,57 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //private static Player instance;
+    //public static Player Instance
+    //{
+    //    get
+    //    {
+    //        return instance;
+    //    }
+    //    set
+    //    {
+    //        instance = value;
+    //    }
+    //}
+
+    public static Player instance { get; private set; }
+
+    public static Player instanceField;
+    public static Player GetInstanceField()
+    {
+        return instanceField;
+    }
+
+    public static void SetInstanceField(Player instanceField)
+    {
+        Player.instanceField = instanceField;
+    }
+
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : EventArgs
+    {
+        public CleanCouter selectedCounter;
+    }
+
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private LayerMask couterLayerMask;
 
     private bool _isWalking;
     private Vector3 lastInteractDir;
+    private CleanCouter selectedCounter;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            Debug.Log("Player instance is null. Assigning instance.");
+        }
+        instance = this;
+    }
 
     private void Start()
     {
@@ -17,23 +60,9 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnInterAction(object sender, System.EventArgs e)
     {
-        Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-        if (moveDir != Vector3.zero)
+        if (selectedCounter != null)
         {
-            lastInteractDir = moveDir;
-        }
-
-        float _interactDistance = 2f;
-        if (Physics.Raycast(transform.position, moveDir, out RaycastHit raycastHit, _interactDistance, couterLayerMask))
-        {
-            if (raycastHit.transform.TryGetComponent(out CleanCouter cleanCouter))
-            {
-                // Has CleanCouter
-                cleanCouter.Interact();
-            }
+            selectedCounter.Interact();
         }
     }
 
@@ -65,8 +94,19 @@ public class Player : MonoBehaviour
             if (raycastHit.transform.TryGetComponent(out CleanCouter cleanCouter))
             {
                 // Has CleanCouter
-
+                if (cleanCouter != selectedCounter)
+                {
+                    SetSelectedCounter(cleanCouter);
+                }
             }
+            else
+            {
+                SetSelectedCounter(null);
+            }
+        }
+        else
+        {
+            SetSelectedCounter(null);
         }
     }
 
@@ -122,5 +162,14 @@ public class Player : MonoBehaviour
         float _rotateSpeed = 10f;
         transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * _rotateSpeed);
 
+    }
+    private void SetSelectedCounter(CleanCouter selectedCounter)
+    {
+        this.selectedCounter = selectedCounter;
+
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+        {
+            selectedCounter = selectedCounter
+        });
     }
 }
