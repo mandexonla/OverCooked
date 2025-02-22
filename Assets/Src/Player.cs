@@ -4,16 +4,73 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private GameInput _gameInput;
+    [SerializeField] private LayerMask couterLayerMask;
 
     private bool _isWalking;
-    // Start is called before the first frame update
-    void Start()
-    {
+    private Vector3 lastInteractDir;
 
+
+    private void Start()
+    {
+        _gameInput.OnInterAction += GameInput_OnInterAction;
     }
 
-    // Update is called once per frame
+    private void GameInput_OnInterAction(object sender, System.EventArgs e)
+    {
+        Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
+
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+
+        float _interactDistance = 2f;
+        if (Physics.Raycast(transform.position, moveDir, out RaycastHit raycastHit, _interactDistance, couterLayerMask))
+        {
+            if (raycastHit.transform.TryGetComponent(out CleanCouter cleanCouter))
+            {
+                // Has CleanCouter
+                cleanCouter.Interact();
+            }
+        }
+    }
+
     private void Update()
+    {
+        HandleMovement();
+        HandleInteractions();
+    }
+
+    public bool IsWalking()
+    {
+        return _isWalking;
+    }
+
+    private void HandleInteractions()
+    {
+        Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
+
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+
+        float _interactDistance = 2f;
+        if (Physics.Raycast(transform.position, moveDir, out RaycastHit raycastHit, _interactDistance, couterLayerMask))
+        {
+            if (raycastHit.transform.TryGetComponent(out CleanCouter cleanCouter))
+            {
+                // Has CleanCouter
+
+            }
+        }
+    }
+
+    private void HandleMovement()
     {
         Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
 
@@ -55,7 +112,6 @@ public class Player : MonoBehaviour
         }
 
 
-
         if (_canMove)
         {
             transform.position += moveDir * _moveSpeed * Time.deltaTime;
@@ -66,10 +122,5 @@ public class Player : MonoBehaviour
         float _rotateSpeed = 10f;
         transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * _rotateSpeed);
 
-    }
-
-    public bool IsWalking()
-    {
-        return _isWalking;
     }
 }
