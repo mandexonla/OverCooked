@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     //    }
     //}
 
-    public static Player instance { get; private set; }
+    public static Player Instance { get; private set; }
 
     public static Player instanceField;
     public static Player GetInstanceField()
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
-        public CleanCouter selectedCounter;
+        public ClearCounter selectedCounter;
     }
 
     [SerializeField] private float _moveSpeed = 7f;
@@ -42,15 +42,15 @@ public class Player : MonoBehaviour
 
     private bool _isWalking;
     private Vector3 lastInteractDir;
-    private CleanCouter selectedCounter;
+    private ClearCounter selectedCounter;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance != null)
         {
-            Debug.Log("Player instance is null. Assigning instance.");
+            Debug.LogError("Player instance is null. Assigning instance.");
         }
-        instance = this;
+        Instance = this;
     }
 
     private void Start()
@@ -89,9 +89,9 @@ public class Player : MonoBehaviour
         }
 
         float _interactDistance = 2f;
-        if (Physics.Raycast(transform.position, moveDir, out RaycastHit raycastHit, _interactDistance, couterLayerMask))
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, _interactDistance, couterLayerMask))
         {
-            if (raycastHit.transform.TryGetComponent(out CleanCouter cleanCouter))
+            if (raycastHit.transform.TryGetComponent(out ClearCounter cleanCouter))
             {
                 // Has CleanCouter
                 if (cleanCouter != selectedCounter)
@@ -163,7 +163,7 @@ public class Player : MonoBehaviour
         transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * _rotateSpeed);
 
     }
-    private void SetSelectedCounter(CleanCouter selectedCounter)
+    private void SetSelectedCounter(ClearCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
 

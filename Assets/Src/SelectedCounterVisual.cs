@@ -3,17 +3,17 @@ using UnityEngine;
 public class SelectedCounterVisual : MonoBehaviour
 {
 
-    [SerializeField] private CleanCouter _cleanCouter;
+    [SerializeField] private ClearCounter clearCounter;
     [SerializeField] private GameObject visualGameObject;
 
     private void Start()
     {
-        Player.instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
     }
 
     private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedCounterChangedEventArgs e)
     {
-        if (e.selectedCounter == _cleanCouter)
+        if (e.selectedCounter == clearCounter)
         {
             //visualGameObject.SetActive(true);
             Show();
