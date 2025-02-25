@@ -432,7 +432,7 @@ Transform:
   m_GameObject: {fileID: 242565463}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40027365, y: 5.4865945e-15, z: -3.086999e-15, w: 0.91639566}
-  m_LocalPosition: {x: 2.68, y: 21.85, z: -22.558657}
+  m_LocalPosition: {x: -0.65, y: 21.85, z: -22.558657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -527,7 +527,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40027365, y: 5.11388e-15, z: -2.2336985e-15, w: 0.91639566}
-  m_LocalPosition: {x: 2.68, y: 21.85, z: -22.558657}
+  m_LocalPosition: {x: -0.65, y: 21.85, z: -22.558657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -729,6 +729,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &775441726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 775441727}
+  m_Layer: 0
+  m_Name: KitchenObjectHoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &775441727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775441726}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: -0.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1362122575}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +809,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &891550141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6266792812952595097, guid: 77037a16e0165554fa1e9cb0322bea6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1139766591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22407cac0e7b5b4cb89a8ad0fe4681e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1139766591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -928,6 +971,7 @@ MonoBehaviour:
   couterLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  kitchenObjectHoldPoint: {fileID: 775441727}
 --- !u!4 &1362122575
 Transform:
   m_ObjectHideFlags: 0
@@ -937,11 +981,12 @@ Transform:
   m_GameObject: {fileID: 1362122573}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.68, y: 0, z: -2.3186564}
+  m_LocalPosition: {x: -0.65, y: 0, z: -2.3186564}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2030574241}
+  - {fileID: 775441727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2030574240
@@ -1138,6 +1183,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: CleanCouter
       objectReference: {fileID: 0}
+    - target: {fileID: 6266792812952595097, guid: 77037a16e0165554fa1e9cb0322bea6a,
+        type: 3}
+      propertyPath: _testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266792812952595097, guid: 77037a16e0165554fa1e9cb0322bea6a,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 891550141}
     m_RemovedComponents:
     - {fileID: 4179936849531370669, guid: 77037a16e0165554fa1e9cb0322bea6a, type: 3}
     m_RemovedGameObjects: []
