@@ -4,8 +4,10 @@ public class SelectedCounterVisual : MonoBehaviour
 {
 
     [SerializeField] private BaseCounter baseCounter;
-    [SerializeField] private GameObject[] visualGameObjectArray;
+    [SerializeField] public GameObject[] visualGameObjectArray;
 
+
+    //private Transform currentTranform;
     private void Start()
     {
         Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
@@ -28,6 +30,7 @@ public class SelectedCounterVisual : MonoBehaviour
     {
         foreach (GameObject visualGameObject in visualGameObjectArray)
         {
+
             visualGameObject.SetActive(true);
         }
     }
