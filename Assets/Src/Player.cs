@@ -3,18 +3,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IKitchenObjectParent
 {
-    //private static Player instance;
-    //public static Player Instance
-    //{
-    //    get
-    //    {
-    //        return instance;
-    //    }
-    //    set
-    //    {
-    //        instance = value;
-    //    }
-    //}
 
     public static Player Instance { get; private set; }
 
@@ -30,6 +18,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     }
 
 
+    public event EventHandler OnPickedSomething;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
@@ -192,6 +181,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this._kitchenObject = kitchenObject;
+
+        if (kitchenObject != null)
+        {
+            OnPickedSomething?.Invoke(this, EventArgs.Empty);
+        }
     }
     public KitchenObject GetKitchenObject()
     {
