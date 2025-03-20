@@ -20,7 +20,7 @@ public class PlatesCounter : BaseCounter
         {
             _sqwanPlateTimer = 0f;
 
-            if (_plateSqwanedAmount < _plateSqwanedAmountMax)
+            if (KitchenGameManager.Instance.IsGamePlaying() && _plateSqwanedAmount < _plateSqwanedAmountMax)
             {
                 _plateSqwanedAmount++;
 
