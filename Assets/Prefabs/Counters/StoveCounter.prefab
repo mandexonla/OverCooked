@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3012834266134908076}
   - component: {fileID: 8155781942307669774}
   - component: {fileID: 3975436726370516049}
+  - component: {fileID: 4054034995162776666}
   m_Layer: 5
   m_Name: StoveBurnWarningUI
   m_TagString: Untagged
@@ -141,7 +142,7 @@ Animator:
   m_GameObject: {fileID: 3539382021391894008}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 979d892e929fd40488d6b6ace427c9df, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -152,6 +153,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!225 &4054034995162776666
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3539382021391894008}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5869365118227428760
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,8 +624,56 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3005671608788006244, guid: 6facbc96a913c85468c23d9a7afe32d1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2355644326296058146}
+    - targetCorrespondingSourceObject: {fileID: 3005671608788006244, guid: 6facbc96a913c85468c23d9a7afe32d1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 633487855239958665}
   m_SourcePrefab: {fileID: 100100000, guid: 6facbc96a913c85468c23d9a7afe32d1, type: 3}
+--- !u!1 &7683934908921234058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3005671608788006244, guid: 6facbc96a913c85468c23d9a7afe32d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4833655915103156206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2355644326296058146
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683934908921234058}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd7ab4fd1a68e2741a53129de69b40b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &633487855239958665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683934908921234058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e35d2c317138d479e463fc5183acf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoveCounter: {fileID: 2628862958097181667}
 --- !u!224 &9044686055651823880 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4508585337450014438, guid: 6facbc96a913c85468c23d9a7afe32d1,
