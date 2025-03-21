@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IKitchenObjectParent
 {
-
+    public float _rotateSpeed = 10f;
     public static Player Instance { get; private set; }
 
     public static Player instanceField;
@@ -164,7 +164,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
         _isWalking = moveDir != Vector3.zero;
 
-        float _rotateSpeed = 10f;
         transform.forward = Vector3.Lerp(transform.forward, -moveDir, Time.deltaTime * _rotateSpeed);
 
     }
