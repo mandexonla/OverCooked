@@ -1,10 +1,11 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IKitchenObjectParent
+public class Player : NetworkBehaviour, IKitchenObjectParent
 {
     public float _rotateSpeed = 10f;
-    public static Player Instance { get; private set; }
+    //public static Player Instance { get; private set; }
 
     public static Player instanceField;
     public static Player GetInstanceField()
@@ -26,7 +27,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     }
 
     [SerializeField] private float _moveSpeed = 7f;
-    [SerializeField] private GameInput _gameInput;
     [SerializeField] private LayerMask couterLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
@@ -37,17 +37,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogError("Player instance is null. Assigning instance.");
-        }
-        Instance = this;
+        //Instance = this;
     }
 
     private void Start()
     {
-        _gameInput.OnInteractAction += GameInput_OnInterAction;
-        _gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+        GameInput.Instance.OnInteractAction += GameInput_OnInterAction;
+        GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
 
@@ -84,7 +80,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void HandleInteractions()
     {
-        Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -117,7 +113,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void HandleMovement()
     {
-        Vector2 inputVector = _gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
