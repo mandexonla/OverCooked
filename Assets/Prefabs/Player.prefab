@@ -5123,7 +5123,7 @@ GameObject:
   - component: {fileID: 8729193415254800097}
   - component: {fileID: 1833436079093952128}
   - component: {fileID: 4548921680471440081}
-  - component: {fileID: 2816714411832284362}
+  - component: {fileID: 378994756892581399}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5164,7 +5164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateSpeed: 20
   _moveSpeed: 7
-  _gameInput: {fileID: 0}
   couterLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -5181,7 +5180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31736d0c6f730ab4095d2eb85c6f156a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2816714411832284362
+--- !u!114 &378994756892581399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
