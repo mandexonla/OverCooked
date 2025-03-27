@@ -7,16 +7,16 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     public float _rotateSpeed = 10f;
     //public static Player Instance { get; private set; }
 
-    public static Player instanceField;
-    public static Player GetInstanceField()
-    {
-        return instanceField;
-    }
+    //public static Player instanceField;
+    //public static Player GetInstanceField()
+    //{
+    //    return instanceField;
+    //}
 
-    public static void SetInstanceField(Player instanceField)
-    {
-        Player.instanceField = instanceField;
-    }
+    //public static void SetInstanceField(Player instanceField)
+    //{
+    //    Player.instanceField = instanceField;
+    //}
 
 
     public event EventHandler OnPickedSomething;
@@ -69,6 +69,11 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
 
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         HandleMovement();
         HandleInteractions();
     }

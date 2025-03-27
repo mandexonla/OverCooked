@@ -20,8 +20,16 @@ public class TutorialUI : MonoBehaviour
         KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
 
         UpdateVisual();
-
-        Show();
+        //DEBUG TRIGGER GAME START AUTOMATICALLY
+        if (KitchenGameManager.Instance.IsCountdownToStartActive())
+        {
+            Hide();
+        }
+        else
+        {
+            Show();
+        }
+        //Show();
     }
 
     private void KitchenGameManager_OnStateChanged(object sender, System.EventArgs e)
