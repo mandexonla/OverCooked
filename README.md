@@ -16,8 +16,8 @@ This project uses many [Unity Packages](http://34.125.146.81:4873/) created and 
 
 - **Tab** - Switch between Chefs.
 - **AWSD** or **Arrow Keys** - Movement.
-- **Q** - Interact with Items (Cutting Table, Stove Table) 
-- **E** - Interact with Plate and Ingredients (Tomato, Cheese, Bread etc)
+- **E** - Interact with Items (Cutting Table, Stove Table) 
+- **F** - Interact with Plate and Ingredients (Tomato, Cheese, Bread etc)
 
 > Gamepad is also supported.
 
