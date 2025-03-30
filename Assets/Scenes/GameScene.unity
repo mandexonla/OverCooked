@@ -7854,6 +7854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 732814717}
   - component: {fileID: 732814716}
+  - component: {fileID: 732814718}
   m_Layer: 0
   m_Name: DeliveryManager
   m_TagString: Untagged
@@ -7889,6 +7890,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &732814718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732814715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 739692261
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!4 &736375114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8268688758613077960, guid: aabda0dce5b1a8345b67937ca1b26d99,
@@ -16268,7 +16285,7 @@ PrefabInstance:
     - target: {fileID: 4845276930943762971, guid: 2da3dcc22749e7f4280737786d898334,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 4845637959249703711, guid: 2da3dcc22749e7f4280737786d898334,
         type: 3}
