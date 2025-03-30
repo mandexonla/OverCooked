@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SelectedCounterVisual : MonoBehaviour
@@ -6,23 +7,35 @@ public class SelectedCounterVisual : MonoBehaviour
     [SerializeField] private BaseCounter baseCounter;
     [SerializeField] public GameObject[] visualGameObjectArray;
 
-
-    //private Transform currentTranform;
     private void Start()
     {
-        //Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        if (Player.LocalInstance != null)
+        {
+            Player.LocalInstance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        }
+        else
+        {
+            Player.OnAnyPlayerSpawned += Player_OnAnyPlayerSpawned;
+        }
+    }
+
+    private void Player_OnAnyPlayerSpawned(object sender, EventArgs e)
+    {
+        if (Player.LocalInstance != null)
+        {
+            Player.LocalInstance.OnSelectedCounterChanged -= Player_OnSelectedCounterChanged;
+            Player.LocalInstance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        }
     }
 
     private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedCounterChangedEventArgs e)
     {
         if (e.selectedCounter == baseCounter)
         {
-            //visualGameObject.SetActive(true);
             Show();
         }
         else
         {
-            //    visualGameObject.SetActive(false);
             Hide();
         }
     }

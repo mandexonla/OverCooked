@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour, IKitchenObjectParent
 {
-    public float _rotateSpeed = 10f;
-    //public static Player Instance { get; private set; }
 
-    //public static Player instanceField;
-    //public static Player GetInstanceField()
-    //{
-    //    return instanceField;
-    //}
 
-    //public static void SetInstanceField(Player instanceField)
-    //{
-    //    Player.instanceField = instanceField;
-    //}
+    public static event EventHandler OnAnyPlayerSpawned;
+    public static event EventHandler OnAnyPickedSomething;
 
+    public static void ResetStaticData()
+    {
+        OnAnyPlayerSpawned = null;
+    }
+
+    public static Player LocalInstance { get; private set; }
 
     public event EventHandler OnPickedSomething;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
@@ -26,6 +23,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         public BaseCounter selectedCounter;
     }
 
+    [SerializeField] private float _rotateSpeed = 10f;
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private LayerMask couterLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
@@ -35,10 +33,6 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     private BaseCounter selectedCounter;
     private KitchenObject _kitchenObject;
 
-    private void Awake()
-    {
-        //Instance = this;
-    }
 
     private void Start()
     {
@@ -46,6 +40,15 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            LocalInstance = this;
+        }
+
+        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+    }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
     {
@@ -189,6 +192,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         if (kitchenObject != null)
         {
             OnPickedSomething?.Invoke(this, EventArgs.Empty);
+            OnAnyPickedSomething?.Invoke(this, EventArgs.Empty);
         }
     }
     public KitchenObject GetKitchenObject()
