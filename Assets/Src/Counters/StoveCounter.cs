@@ -155,9 +155,9 @@ public class StoveCounter : BaseCounter, IHasProgress
                     // player is holding a plate
                     if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectScriptObject()))
                     {
-                        GetKitchenObject().DestroySelf();
+                        KitchenObject.DestroyKitchenObject(GetKitchenObject());
 
-                        _state.Value = State.Idle;
+                        SetStateIdleServerRpc();
                     }
                 }
             }
