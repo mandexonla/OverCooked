@@ -7,9 +7,34 @@ public class KitchenGameMultiplayer : NetworkBehaviour
 
     [SerializeField] private KitchenObjectListSO kitchenObjectListSO;
 
-    public KitchenGameMultiplayer()
+    private void Awake()
     {
         Instance = this;
+    }
+
+    public void StartHost()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback += KitchenGameMultiplayer_ConnectionApprovalCallback;
+        NetworkManager.Singleton.StartHost();
+    }
+
+    private void KitchenGameMultiplayer_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest connectionApprovalRequest,
+        NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
+    {
+        if (KitchenGameManager.Instance.IsWaitingToStart())
+        {
+            connectionApprovalResponse.Approved = true;
+            connectionApprovalResponse.CreatePlayerObject = true;
+        }
+        else
+        {
+            connectionApprovalResponse.Approved = false;
+        }
+    }
+
+    public void StartClient()
+    {
+        NetworkManager.Singleton.StartClient();
     }
 
     public void SpawnKitchenObject(KitchenObjectScriptObject _kitchenObjectScriptObject,

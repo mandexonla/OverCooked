@@ -1,4 +1,3 @@
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +11,13 @@ public class TestingNetcodeUI : MonoBehaviour
         startHostButton.onClick.AddListener(() =>
         {
             Debug.Log("Starting Host");
-            NetworkManager.Singleton.StartHost();
+            KitchenGameMultiplayer.Instance.StartHost();
             Hide();
         });
         startclientButton.onClick.AddListener(() =>
         {
             Debug.Log("Starting Client");
-            NetworkManager.Singleton.StartClient();
+            KitchenGameMultiplayer.Instance.StartClient();
             Hide();
         });
 
