@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using UnityEngine;
@@ -12,12 +11,14 @@ public class KitchenGameMultiplayer : NetworkBehaviour
 
     public static KitchenGameMultiplayer Instance { get; private set; }
 
+    public static bool playMultiplayer = true;
+
     public event EventHandler OnTryingToJoinGame;
     public event EventHandler OnFailedToJoinGame;
     public event EventHandler OnPlayerDataNetworkListChanged;
 
     [SerializeField] private KitchenObjectListSO kitchenObjectListSO;
-    [SerializeField] private List<Color> playerColorList;
+
 
 
     public NetworkList<PlayerData> playerDataNetworkList;
@@ -33,6 +34,16 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         playerName = PlayerPrefs.GetString(PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER, "PlayerName" + UnityEngine.Random.Range(100, 1000));
         playerDataNetworkList = new NetworkList<PlayerData>();
         playerDataNetworkList.OnListChanged += PlayerDataNetworkList_OnListChanged;
+    }
+
+    private void Start()
+    {
+        if (!playMultiplayer)
+        {
+            // Singleplayer
+            StartHost();
+            Loader.LoadNetwork(Loader.Scene.GameScene);
+        }
     }
 
     public string GetPlayerName()
@@ -78,7 +89,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = clientId,
-            colorId = GetFirstUnusedColorId(),
+
         });
         SetPlayerNameServerRpc(GetPlayerName());
     }
@@ -156,6 +167,15 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     {
         KitchenObjectScriptObject kitchenObjectSO = GetKitchenObjectSOFromIndex(kitchenObjectSOIndex);
 
+        kitchenObjectParentNetworkObjectReference.TryGet(out NetworkObject kitchenObjectParentNetworkObject);
+        IKitchenObjectParent kitchenObjectParent = kitchenObjectParentNetworkObject.GetComponent<IKitchenObjectParent>();
+
+        if (kitchenObjectParent.HasKitchenObject())
+        {
+            // Parent already has a kitchen object
+            return;
+        }
+
         Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
 
         NetworkObject kitchenObjectNetworkObject = kitchenObjectTransform.GetComponent<NetworkObject>();
@@ -163,8 +183,6 @@ public class KitchenGameMultiplayer : NetworkBehaviour
 
         KitchenObject _kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
 
-        kitchenObjectParentNetworkObjectReference.TryGet(out NetworkObject kitchenObjectParentNetworkObject);
-        IKitchenObjectParent kitchenObjectParent = kitchenObjectParentNetworkObject.GetComponent<IKitchenObjectParent>();
 
         _kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
     }
@@ -188,6 +206,13 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     private void DestroyKitchenObjectServerRpc(NetworkObjectReference kitchenObjectNetworkObjectReference)
     {
         kitchenObjectNetworkObjectReference.TryGet(out NetworkObject kitchenObjectNetworkObject);
+
+        if (kitchenObjectNetworkObject == null)
+        {
+            // This object is already destroyed
+            return;
+        }
+
         KitchenObject kitchenObject = kitchenObjectNetworkObject.GetComponent<KitchenObject>();
 
         ClearKitchenObjectOnParentClientRpc(kitchenObjectNetworkObjectReference);
@@ -244,10 +269,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         return playerDataNetworkList[playerIndex];
     }
 
-    public Color GetPlayerColor(int colorId)
-    {
-        return playerColorList[colorId];
-    }
+
 
     public void ChangePlayerColor(int colorId)
     {
@@ -285,17 +307,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         return true;
     }
 
-    private int GetFirstUnusedColorId()
-    {
-        for (int i = 0; i < playerColorList.Count; i++)
-        {
-            if (IsColorAvailable(i))
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
+
 
     public void KickPlayer(ulong clientId)
     {
