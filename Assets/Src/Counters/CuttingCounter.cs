@@ -108,7 +108,11 @@ public class CuttingCounter : BaseCounter, IHasProgress
     [ServerRpc(RequireOwnership = false)]
     private void CutObjectServerRpc()
     {
-        CutObjectClientRpc();
+        if (HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectScriptObject()))
+        {
+            // There is a KitchenObject on the counter and it can be cut
+            CutObjectClientRpc();
+        }
     }
     [ClientRpc]
     private void CutObjectClientRpc()
@@ -129,15 +133,19 @@ public class CuttingCounter : BaseCounter, IHasProgress
     [ServerRpc(RequireOwnership = false)]
     private void TestCuttingProgressDoneServerRpc()
     {
-        CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectScriptObject());
-        if (_cuttingProgress >= cuttingRecipeSO._cuttingProgressMax)
+        if (HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectScriptObject()))
         {
-            KitchenObjectScriptObject outputKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectScriptObject());
+            // There is a KitchenObject on the counter and it can be cut
+            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectScriptObject());
+            if (_cuttingProgress >= cuttingRecipeSO._cuttingProgressMax)
+            {
+                KitchenObjectScriptObject outputKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectScriptObject());
 
 
-            KitchenObject.DestroyKitchenObject(GetKitchenObject());
+                KitchenObject.DestroyKitchenObject(GetKitchenObject());
 
-            KitchenObject.SpawnKitchenObject(outputKitchenObjectSO, this);
+                KitchenObject.SpawnKitchenObject(outputKitchenObjectSO, this);
+            }
         }
     }
 
