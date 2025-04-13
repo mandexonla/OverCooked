@@ -30,7 +30,7 @@ public class KitchenGameManager : NetworkBehaviour
     private bool _isLocalPlayerReady;
     private NetworkVariable<float> _countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> _gamePlayingtTimer = new NetworkVariable<float>(0f);
-    private float _gamePlayingTimerMax = 10f;
+    private float _gamePlayingTimerMax = 30f;
     private bool _isLocalGamePaused = false;
     private NetworkVariable<bool> _isGamePaused = new NetworkVariable<bool>(false);
     private Dictionary<ulong, bool> playerReadyDictionary;
