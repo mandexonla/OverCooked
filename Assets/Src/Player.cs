@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -30,7 +30,9 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     [SerializeField] private LayerMask collisionLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
     [SerializeField] private List<Vector3> spawnPosionList;
-    //[SerializeField] private PlayerVisual playerVisual;
+    [SerializeField] private List<PlayerVisual> playerVisualList;
+
+
 
     private bool _isWalking;
     private Vector3 lastInteractDir;
@@ -42,9 +44,6 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     {
         GameInput.Instance.OnInteractAction += GameInput_OnInterAction;
         GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
-
-        //PlayerData playerData = KitchenGameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        //playerVisual.SetPlayerColor(KitchenGameMultiplayer.Instance.GetPlayerColor(playerData.colorId));
     }
 
     public override void OnNetworkSpawn()
@@ -53,6 +52,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         {
             LocalInstance = this;
         }
+
 
         transform.position = spawnPosionList[KitchenGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
 
