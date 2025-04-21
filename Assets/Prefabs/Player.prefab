@@ -378,6 +378,8 @@ MonoBehaviour:
   - {x: 2, y: 0, z: 0}
   - {x: -2, y: 0, z: -2}
   - {x: 2, y: 0, z: -2}
+  playerVisualList:
+  - {fileID: 7306026647468035552, guid: bbbeffc45eaa6194ab3e7ff87f4397d4, type: 3}
 --- !u!114 &4548921680471440081
 MonoBehaviour:
   m_ObjectHideFlags: 0

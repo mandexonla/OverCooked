@@ -89,7 +89,6 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = clientId,
-
         });
         SetPlayerNameServerRpc(GetPlayerName());
     }

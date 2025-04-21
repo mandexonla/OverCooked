@@ -12,6 +12,7 @@ public class CharacterSelectPlayer : MonoBehaviour
     [SerializeField] private Button kickButton;
     [SerializeField] private TextMeshPro playerNameText;
 
+    public static object Instance { get; internal set; }
 
     private void Awake()
     {
