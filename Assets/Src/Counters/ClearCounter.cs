@@ -19,7 +19,6 @@ public class ClearCounter : BaseCounter
                 // player is not carrying anything
 
             }
-
         }
         else
         {
@@ -34,10 +33,6 @@ public class ClearCounter : BaseCounter
                     {
                         KitchenObject.DestroyKitchenObject(GetKitchenObject());
                     }
-
-
-
-
                 }
                 else
                 {
