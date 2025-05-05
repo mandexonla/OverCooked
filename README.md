@@ -1,31 +1,18 @@
-# OverCooked
 
+# 131-Nguyen Dang Man-21CNTT4
 
-## Summary
-
-This game is a study case for the game Overcooked! 2.
-
-All art assets like Textures, models, audio clips etc where created by the indie game maker **Code Monkey** for this [Free Complete Unity Course](https://youtu.be/AmGSEH7QcDg). 
-
-However, the game structure and the source-code were created by me and they are very different from the course.
-
-This project uses many [Unity Packages](https://docs.unity3d.com/Manual/PackagesList.html) created and published by me. All of them are on the MIT license so you can freely use them into your project.
-
-
-## Controls
-
-- **Tab** - Switch between Chefs.
-- **AWSD** or **Arrow Keys** - Movement.
-- **E** - Interact with Items (Cutting Table, Stove Table) 
-- **F** - Interact with Plate and Ingredients (Tomato, Cheese, Bread etc)
-
-> Gamepad is also supported.
-
-## How To add new Recipes
-
-1. Inside the [Recipe folder](/Assets/Prefabs), create a new Recipe Data asset by using the Create menu, Kitchen Chaos > Recipes > Recipe;
-2. Open the [IngredientsToRecipe prefab](/Assets/Prefabs/Player.prefab) and link the new Recipe asset into the Recipe field;
-
-    ![image](https://github.com/user-attachments/assets/f1982c11-201a-4251-837d-44b9d48335e9)
-
-3. Place each child ingredient in the right position;
+## How to Install and Run
+- Downlaod unity here: https://unity.com/download (recommended version: Unity 2022.3.54f1 LTS)
+- .NET SDK (if building outside Unity)
+-------------------------------------------
+## After Unity Editor installed
+- Download and Unzip 131-Nguyen Đăng Mãn-21CNTT4.zip  project file into any folder of your choice
+- Open Unity Hub, press button "Add" and click " Add project from disk"
+- Select the unzipped folder
+- Click "window" on taskbar Unity Hub, select "Package Manager"
+- Search Netcode for GameObjects and install ( install 1.2.0 version )
+  - If you don't see Netcode for GameObjects versopn 1.2.0
+  - Click plus icon on the Packe Manager and add package by name
+  - And type the exact name " com.unity.netcode.gameobjects "
+  - And then over here for version, let type " 1.2.0 " and click "Add" button
+- Open MainMenuScene and run
