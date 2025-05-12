@@ -30,7 +30,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     [SerializeField] private LayerMask collisionLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
     [SerializeField] private List<Vector3> spawnPosionList;
-    [SerializeField] private List<PlayerVisual> playerVisualList;
+    [SerializeField] private PlayerVisual playerVisual;
 
 
 

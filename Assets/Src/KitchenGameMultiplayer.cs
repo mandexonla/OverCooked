@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
     public event EventHandler OnPlayerDataNetworkListChanged;
 
     [SerializeField] private KitchenObjectListSO kitchenObjectListSO;
+    [SerializeField] private List<Color> playerColorList;
 
 
 
@@ -89,6 +91,7 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         playerDataNetworkList.Add(new PlayerData
         {
             clientId = clientId,
+            colorId = GetFirstUnusedColorId(),
         });
         SetPlayerNameServerRpc(GetPlayerName());
     }
@@ -268,7 +271,10 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         return playerDataNetworkList[playerIndex];
     }
 
-
+    public Color GetPlayerColor(int ColorId)
+    {
+        return playerColorList[ColorId];
+    }
 
     public void ChangePlayerColor(int colorId)
     {
@@ -306,7 +312,17 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         return true;
     }
 
-
+    private int GetFirstUnusedColorId()
+    {
+        for (int i = 0; i < playerColorList.Count; i++)
+        {
+            if (IsColorAvailable(i))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public void KickPlayer(ulong clientId)
     {
