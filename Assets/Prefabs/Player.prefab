@@ -378,8 +378,7 @@ MonoBehaviour:
   - {x: 2, y: 0, z: 0}
   - {x: -2, y: 0, z: -2}
   - {x: 2, y: 0, z: -2}
-  playerVisualList:
-  - {fileID: 7306026647468035552, guid: bbbeffc45eaa6194ab3e7ff87f4397d4, type: 3}
+  playerVisual: {fileID: 6648463019085482686}
 --- !u!114 &4548921680471440081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,6 +633,7 @@ GameObject:
   - component: {fileID: 3429355400511805613}
   - component: {fileID: 3786580324522055933}
   - component: {fileID: 8103471512210140330}
+  - component: {fileID: 6648463019085482686}
   m_Layer: 0
   m_Name: Chef
   m_TagString: Untagged
@@ -709,6 +709,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 3429355400511805613}
+--- !u!114 &6648463019085482686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5657268194115450383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e68d0f256e614a49af19f96ca57da65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyMeshRenderer: {fileID: 7056872093608524920}
+  headMeshRenderer: {fileID: 7603235414603324555}
 --- !u!1 &7793353088217959356
 GameObject:
   m_ObjectHideFlags: 0
